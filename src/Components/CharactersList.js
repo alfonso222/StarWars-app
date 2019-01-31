@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Character from './Character.js';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -14,7 +15,8 @@ const styles = theme => ({
         fleXDirection: 'row',
         justifyContent: 'center',
         marginTop: '10px',
-        zIndex: 100000
+        zIndex: 100000,
+        flexWrap: 'wrap',
     }
 
 });
@@ -49,8 +51,6 @@ class CharactersList extends Component {
                         image={this.state.characterImageLinks[index]}
                     />
                 ))}
-
-
             </div>
         );
     }

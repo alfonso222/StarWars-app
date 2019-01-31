@@ -9,21 +9,31 @@ import Fade from '@material-ui/core/Fade';
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Grid from '@material-ui/core/Grid';
 
 const luke = require('../Images/luke.jpg')
 
 const styles = theme => ({
     card: {
         Width: '100%',
+        height: '100%',
         border: '1px solid grey',
         margin: '10px',
         transition: 'all 0.1s ease-out',
+     
     },
     media: {
-        height: 200,
-        width: 200
+        height: 0,
+        paddingTop: '56.25%', // 16:9,
+        marginTop:'30',
+        minWidth: '250px',    
+        [theme.breakpoints.down('sm')]: {
+            height: 0,
+            paddingTop: '56.25%', // 16:9,
+     
+            minWidth: '150px',
+        }
     },
     content: {
         backgroundColor: '#000',
@@ -34,19 +44,23 @@ const styles = theme => ({
     },
     dialogContent: {
         color: '#ff6',
-        fontSize: '24px',
+        fontSize: '1em',
     },
    
     dialog: {
         backgroundColor: '#0e0d0d',
-        minHeight: '400px'
+        minHeight: '400px',
+        [theme.breakpoints.down('sm')]: {
+           margin: 0,
+        
+        }
 
     },
     progress: {
         color: 'grey',
         position: 'absolute',
         top: '50%',
-        left: '50%',
+        left: '45%',
     },
     date: {
         fontSize: '16px'
@@ -142,7 +156,7 @@ class Character extends Component {
 
 
         return (
-            <div >
+            <div>
                 <Fade in={true} timeout={5000} >
                     <Card className={classes.card} className={classes.delay} >
                         <CardActionArea onClick={() => { this.getCharacterData(url) }}>
@@ -153,7 +167,7 @@ class Character extends Component {
 
                             />
                             <CardContent className={classes.content}>
-                                <Typography gutterBottom variant="h5" component="h2" className={classes.text}>
+                                <Typography gutterBottom  className={classes.text}>
                                     {name}
                                 </Typography>
                             </CardContent>
@@ -166,7 +180,7 @@ class Character extends Component {
                     onClose={() => { this.handleClose() }}
                     className={classes.dialog}
                     fullWidth
-                    maxWidth='lg'
+                    
                     PaperProps={{
                         classes: {
                             root: classes.dialog
@@ -199,7 +213,7 @@ class Character extends Component {
                     </DialogContent>
                 </Dialog>
 
-            </div>
+            </div >
         );
     }
 }
