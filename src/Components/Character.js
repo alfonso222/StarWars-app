@@ -66,57 +66,53 @@ class Character extends Component {
     };
   }
 
-  getCharacterData(url) {
+  async getCharacterData(url) {
+    // Opens modal first
     this.handleClickOpen();
-    // Promise chain that gets the character data then iterates through the films and adds it to state
-    axios
-      .get(url)
-      .then(res => {
-        const persons = res.data;
-        this.setState({ characterData: persons });
-        console.log(res.data);
 
-        return res.data.films;
-      })
-      .then(res => {
-        console.log(res);
+    try {
+      // Get character data
+      let character = await axios.get(url);
+      let promises = [];
 
-        let promises = [];
-        let newArray = [];
-
-        //Adds multiple api calls to an array of promises
-        for (let i = 0; i < res.length; i++) {
-          promises.push(axios.get(res[i]));
-        }
-
-        //executes every promise in array and runs code only after they all finish
-        axios
-          .all(promises)
-          .then(
-            axios.spread((...args) => {
-              for (let i = 0; i < args.length; i++) {
-                newArray.push(args[i].data);
-              }
-
-              return newArray;
-            })
-          )
-          .then(res => {
-            console.log(res);
-            this.setState({ moviesAppeared: newArray });
-          });
-      })
-      .catch(error => {
-        //Logs error that occurs if initial api call fails
-        console.log(error.response);
-        alert(error);
-        this.handleClose();
+      // Store Promises into an array
+      character.data.films.map(film => {
+        promises.push(axios.get(film));
       });
+
+      // Execute all promises and store data into another array
+      Promise.all(promises)
+        .then(res => {
+          let array = [];
+
+          for (let i = 0; i < promises.length; i++) {
+            array.push(res[i].data);
+          }
+
+          return array;
+        })
+        .then(res => {
+          // Set state after all promises have executed
+          this.setState({ moviesAppeared: res });
+        });
+    } catch (error) {
+      console.log(error);
+      alert(error);
+      this.handleClose();
+    }
   }
 
   formatDate(date) {
-    let formattedDate = new Date(date);
-    return formattedDate;
+    return (
+      "( " +
+      new Date(date).toLocaleString("en-us", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }) +
+      " )"
+    );
   }
 
   handleClickOpen = () => {
@@ -174,14 +170,7 @@ class Character extends Component {
                 <Typography key={index} className={classes.dialogContent}>
                   {film.title + " "}
                   <span className={classes.date}>
-                    {"( " +
-                      new Date(film.release_date).toLocaleString("en-us", {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric"
-                      }) +
-                      " )"}
+                    {this.formatDate(film.release_date)}
                   </span>
                 </Typography>
               ))
