@@ -6,7 +6,7 @@
 }
 
 p#start {
-    font-size: 200%;
+    font-size: 4vh;
     font-weight: 200;
     color: #4ee;
     opacity: 0;
@@ -90,7 +90,7 @@ p#start {
 }
 
 #intro {
-    font-size: 12em;
+    font-size: 15vh;
     text-align: center;
     line-height: 0.8em;
     letter-spacing: -0.05em;
@@ -193,7 +193,7 @@ p#start {
     height: 50em;
     bottom: 0;
     z-index: -1;
-    font-size: 4em;
+    font-size: 5vw;
     text-align: justify;
     overflow: hidden;
     -webkit-transform-origin: 50% 100%;

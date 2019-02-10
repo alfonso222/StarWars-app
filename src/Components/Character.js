@@ -11,15 +11,12 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-const luke = require("../Images/luke.jpg");
-
 const styles = theme => ({
   card: {
     width: "20vh",
     height: "20vh",
     border: "1px solid grey",
     transitionDelay: "8s !important",
-    border: "1px solid grey",
     margin: "10px"
   },
   media: {

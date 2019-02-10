@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Character from "./Character.js";
-import Grid from "@material-ui/core/Grid";
 
 // Including json file
 const characterData = require("../characters.json");
