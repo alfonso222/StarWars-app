@@ -20,15 +20,18 @@ const styles = theme => ({
     margin: "10px"
   },
   media: {
-    height: "auto",
-    width: "20vh",
+    height: "100%",
+    width: "22vh",
     paddingTop: "15vh"
   },
   content: {
-    backgroundColor: "#000"
+    backgroundColor: "#000",
+    height: "8vh",
+    padding: "5px"
   },
   text: {
-    color: "#ff6"
+    color: "#ff6",
+    fontSize: "1em"
   },
   dialogContent: {
     color: "#ff6",
