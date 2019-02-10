@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../StyleSheets/text.css";
+import "../StyleSheets/scrollingtext.css";
 
 class ScrollingText extends Component {
   constructor() {
