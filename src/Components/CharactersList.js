@@ -1,59 +1,52 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Character from './Character.js';
-import Grid from '@material-ui/core/Grid';
-
-
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Character from "./Character.js";
+import Grid from "@material-ui/core/Grid";
 
 // Including json file
-const characterData = require('../characters.json')
+const characterData = require("../characters.json");
 
 const styles = theme => ({
-
-    container: {
-        display: 'flex',
-        fleXDirection: 'row',
-        justifyContent: 'center',
-        marginTop: '10px',
-        zIndex: 100000,
-        flexWrap: 'wrap',
-    }
-
+  container: {
+    display: "flex",
+    fleXDirection: "row",
+    justifyContent: "center",
+    zIndex: 1000,
+    flexWrap: "wrap",
+    backgroundColor: "#000"
+  }
 });
 
 class CharactersList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      charactersArray: characterData,
+      characterImageLinks: [
+        require("../Images/luke.jpg"),
+        require("../Images/darth.jpeg"),
+        require("../Images/obi.jpg"),
+        require("../Images/r2d2.png")
+      ]
+    };
+  }
 
-    constructor() {
-        super()
-        this.state = {
-            charactersArray: characterData,
-            characterImageLinks: [
-                require('../Images/luke.jpg'),
-                require('../Images/darth.jpeg'),
-                require('../Images/obi.jpg'),
-                require('../Images/r2d2.png')
-            ]
-        };
-    }
+  render() {
+    const { classes } = this.props;
 
-
-    render() {
-
-        const { classes } = this.props
-
-        return (
-            <div className={classes.container}>
-                {this.state.charactersArray.characters.map((character, index) => (
-                    <Character
-                        key={index}
-                        name={character.name}
-                        url={character.url}
-                        image={this.state.characterImageLinks[index]}
-                    />
-                ))}
-            </div>
-        );
-    }
+    return (
+      <div className={classes.container}>
+        {this.state.charactersArray.characters.map((character, index) => (
+          <Character
+            key={index}
+            name={character.name}
+            url={character.url}
+            image={this.state.characterImageLinks[index]}
+          />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default withStyles(styles)(CharactersList);
