@@ -76,7 +76,8 @@ class Character extends Component {
       let promises = [];
 
       // Store Promises into an array
-      character.data.films.map(film => {
+    
+      character.data.films.forEach(film => {
         promises.push(axios.get(film));
       });
 
